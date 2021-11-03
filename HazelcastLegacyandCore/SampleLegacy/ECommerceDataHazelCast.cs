@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using SampleLegacy.Models;
+using SampleModel;
 
 namespace SampleLegacy
 {
@@ -48,7 +48,6 @@ namespace SampleLegacy
 
             // Get the Distributed Map from Cluster.
             cartItemsMap = await hazelcastClient.GetMapAsync<int, CartItem>("distributed-cartitem-map");
-            await cartItemsMap.ClearAsync();
         }
 
         private void StartAsync()
@@ -62,8 +61,6 @@ namespace SampleLegacy
         {
             // destroy the map
             await hazelcastClient.DestroyAsync(cartItemsMap);
-
-            Debug.WriteLine("ShutdownAsync finished successfully.");
         }
 
         public async Task<List<CartItem>> GetCartItemsAsync()

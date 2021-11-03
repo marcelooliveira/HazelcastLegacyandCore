@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SampleNetCore.Models
+namespace SampleModel
 {
     [Serializable]
     public class CartItem

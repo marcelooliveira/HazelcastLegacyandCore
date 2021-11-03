@@ -1,4 +1,4 @@
-﻿using SampleNetCore.Models;
+﻿using SampleModel;
 using Hazelcast;
 using Hazelcast.DistributedObjects;
 using System;
@@ -29,7 +29,6 @@ namespace SampleNetCore
 
             // Get the Distributed Map from Cluster.
             cartItemsMap = await hazelcastClient.GetMapAsync<int, CartItem>("distributed-cartitem-map");
-            await cartItemsMap.ClearAsync();
         }
 
         private void StartAsync()
