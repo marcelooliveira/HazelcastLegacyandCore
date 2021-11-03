@@ -23,10 +23,11 @@ namespace SampleNetCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSingleton<IECommerceDataHazelCast, ECommerceDataHazelCast>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime hostApplicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -46,6 +47,15 @@ namespace SampleNetCore
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+            });
+
+            hostApplicationLifetime.ApplicationStopping.Register(() =>
+            {
+                using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var eCommerceDataHazelCast = scope.ServiceProvider.GetService<IECommerceDataHazelCast>();
+                    eCommerceDataHazelCast.ShutdownAsync().Wait();
+                }
             });
         }
     }

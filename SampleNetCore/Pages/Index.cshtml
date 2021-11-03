@@ -1,10 +1,41 @@
 ﻿@page
-@model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
+@using SampleNetCore.Models
+@model SampleNetCore.Pages.IndexModel
+@{ ViewData["Title"] = "Shopping Cart"; }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h3>
+    SHOPPING CART
+</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Qty</th>
+            <th>Description</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cartItem in Model.CartItems)
+        {
+        <tr>
+            <td>@cartItem.Quantity</td>
+            <td>@cartItem.Description</td>
+            <td>@cartItem.UnitPrice</td>
+            <td>@cartItem.Total</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<form method="POST">
+    <div class="row">
+        <div class="col">
+            <input type="submit" name="addOrange" value="Add Orange" />
+            <input type="submit" name="addCoconut" value="Add Coconut" />
+            <input type="submit" name="addApple" value="Add Apple" />
+            <input type="submit" name="addGrapefruit" value="Add Grapefruit" />
+        </div>
+    </div>
+</form>

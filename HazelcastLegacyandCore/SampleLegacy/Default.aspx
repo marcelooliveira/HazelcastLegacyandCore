@@ -1,42 +1,48 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SampleLegacy._Default" %>
+﻿<%@ Page Async="true" Title="Shopping Cart" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SampleLegacy._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+    <h3>
+        SHOPPING CART
+    </h3>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
+    <asp:Repeater ID="cartItemsRepeater" runat="server">
+
+    <HeaderTemplate>
+        <table id="cartItemsTable" class="table">
+        <thead>
+            <tr>
+                <th>Qty</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+    </HeaderTemplate>
+
+    <ItemTemplate>
+        <tr>
+            <td><%# Eval("Quantity") %></td>
+            <td><%# Eval("Description") %></td>
+            <td><%# Eval("UnitPrice") %></td>
+            <td><%# Eval("Total") %></td>
+        </tr>
+    </ItemTemplate>
+
+    <FooterTemplate>
+        </table>
+    </FooterTemplate>
+    </asp:Repeater>
+
+    <form method="POST">
+        <div class="row">
+            <div class="col">
+                <asp:Button runat="server" ID="addOrange" Text="Add Orange" OnClick="addOrange_Click" />
+                <asp:Button runat="server" ID="addCoconut" Text="Add Coconut" OnClick="addCoconut_Click" />
+                <asp:Button runat="server" ID="addApple" Text="Add Apple" OnClick="addApple_Click" />
+                <asp:Button runat="server" ID="addGrapefruit" Text="Add Grapefruit" OnClick="addGrapefruit_Click" />
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-        </div>
-    </div>
+    </form>
 
 </asp:Content>
