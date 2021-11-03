@@ -12,10 +12,6 @@ namespace SampleLegacy
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
-            }
-
             RegisterAsyncTask(new PageAsyncTask(GetCartItemsAsync));
         }
 
@@ -26,40 +22,30 @@ namespace SampleLegacy
             cartItemsRepeater.DataBind();
         }
 
-        protected void addOrange_Click(object sender, EventArgs e)
+        protected void addItem_Click(object sender, EventArgs e)
         {
             RegisterAsyncTask(new PageAsyncTask(async (t) =>
             {
-                await ECommerceDataHazelCast.Instance.AddCartItemAsync(1, "Orange", 1.50m, 1);
+                switch (((Button)sender).ClientID)
+                {
+                    case "MainContent_addOrange":
+                        await ECommerceDataHazelCast.Instance.AddCartItemAsync(1, "Orange", 1.50m, 1);
+                        break;
+                    case "MainContent_addCoconut":
+                        await ECommerceDataHazelCast.Instance.AddCartItemAsync(2, "Coconut", 2.50m, 1);
+                        break;
+                    case "MainContent_addApple":
+                        await ECommerceDataHazelCast.Instance.AddCartItemAsync(3, "Apple", 1.00m, 1);
+                        break;
+                    case "MainContent_addGrapefruit":
+                        await ECommerceDataHazelCast.Instance.AddCartItemAsync(4, "Grapefruit", 2.0m, 1);
+                        break;
+                    default:
+                        break;
+                }
             }));
             RegisterAsyncTask(new PageAsyncTask(GetCartItemsAsync));
         }
 
-        protected void addCoconut_Click(object sender, EventArgs e)
-        {
-            RegisterAsyncTask(new PageAsyncTask(async (t) =>
-            {
-                await ECommerceDataHazelCast.Instance.AddCartItemAsync(2, "Coconut", 2.50m, 1);
-            }));
-            RegisterAsyncTask(new PageAsyncTask(GetCartItemsAsync));
-        }
-
-        protected void addApple_Click(object sender, EventArgs e)
-        {
-            RegisterAsyncTask(new PageAsyncTask(async (t) =>
-            {
-                await ECommerceDataHazelCast.Instance.AddCartItemAsync(3, "Apple", 1.00m, 1);
-            }));
-            RegisterAsyncTask(new PageAsyncTask(GetCartItemsAsync));
-        }
-
-        protected void addGrapefruit_Click(object sender, EventArgs e)
-        {
-            RegisterAsyncTask(new PageAsyncTask(async (t) =>
-            {
-                await ECommerceDataHazelCast.Instance.AddCartItemAsync(4, "Grapefruit", 2.0m, 1);
-            }));
-            RegisterAsyncTask(new PageAsyncTask(GetCartItemsAsync));
-        }
     }
 }

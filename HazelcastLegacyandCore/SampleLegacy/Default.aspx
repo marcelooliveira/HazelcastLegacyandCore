@@ -37,10 +37,10 @@
     <form method="POST">
         <div class="row">
             <div class="col">
-                <asp:Button runat="server" ID="addOrange" Text="Add Orange" OnClick="addOrange_Click" />
-                <asp:Button runat="server" ID="addCoconut" Text="Add Coconut" OnClick="addCoconut_Click" />
-                <asp:Button runat="server" ID="addApple" Text="Add Apple" OnClick="addApple_Click" />
-                <asp:Button runat="server" ID="addGrapefruit" Text="Add Grapefruit" OnClick="addGrapefruit_Click" />
+                <asp:Button runat="server" ID="addOrange" Text="Add Orange" OnClick="addItem_Click" />
+                <asp:Button runat="server" ID="addCoconut" Text="Add Coconut" OnClick="addItem_Click" />
+                <asp:Button runat="server" ID="addApple" Text="Add Apple" OnClick="addItem_Click" />
+                <asp:Button runat="server" ID="addGrapefruit" Text="Add Grapefruit" OnClick="addItem_Click" />
             </div>
         </div>
     </form>
