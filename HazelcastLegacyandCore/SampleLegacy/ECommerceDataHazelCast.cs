@@ -52,7 +52,7 @@ namespace SampleLegacy
 
         private void StartAsync()
         {
-            var options = HazelcastOptions.Build();
+            var options = new HazelcastOptions();
             // create an Hazelcast client and connect to a server running on localhost
             hazelcastClient = HazelcastClientFactory.StartNewClientAsync(options).Result;
         }
